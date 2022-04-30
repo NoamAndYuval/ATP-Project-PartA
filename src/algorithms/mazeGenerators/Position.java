@@ -1,19 +1,53 @@
 package algorithms.mazeGenerators;
 
 public class Position {
-    int x;
-    int y;
-    int val;
-    boolean visited;
-    Position prev;
+    private int x;
+    private int y;
+    private int val;
+    private boolean visited;
+    private Position prev;
 
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
-        this.visited=false;
+        this.visited = false;
         this.val = 0;
         this.prev = null;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                x +
+                "," + y +
+                '}';
+    }
+
+    public int getRowIndex() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getColumnIndex() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+
+    public int getVal() {
+        return val;
+    }
+
+    public void setVal(int val) {
+        this.val = val;
+    }
+
     public Position getPrev() {
         return prev;
     }
@@ -25,14 +59,6 @@ public class Position {
 
     public void setVisited(boolean visited) {
         this.visited = visited;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public boolean isVisited() {

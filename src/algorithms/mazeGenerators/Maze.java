@@ -1,17 +1,30 @@
 package algorithms.mazeGenerators;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
 public class Maze {
     private int row;
     private int col;
-    private int[][] maze_matrix;
+
+
+    private Position[][] maze_matrix;
+    private Position source;
+    private Position target;
+
 
     public Maze(int row, int col) {
         this.row = row;
         this.col = col;
-        maze_matrix = new int[row][col];
+        maze_matrix = new Position[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                maze_matrix[i][j] = new Position(i, j);
+            }
+        }
+        source = maze_matrix[0][0];
+        target = maze_matrix[row - 1][col - 1];
     }
 
     public int getRow() {
@@ -25,7 +38,13 @@ public class Maze {
     public void print() {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                System.out.print(maze_matrix[i][j]);
+                Position temp = maze_matrix[i][j];
+                if (temp == source)
+                    System.out.print("S");
+                else if (temp == target)
+                    System.out.print("E");
+                else
+                    System.out.print(temp.getVal());
             }
             System.out.println();
         }
@@ -39,9 +58,47 @@ public class Maze {
         if (val != 0 && val != 1) {
             throw new IllegalArgumentException();
         }
-        maze_matrix[row][col] = val;
+        maze_matrix[row][col].setVal(val);
     }
 
+    public Position getStartPosition() {
+        return source;
+    }
+
+    public Position getGoalPosition() {
+        return target;
+    }
+
+    public Position getPosition(int x, int y) {
+        try {
+            return maze_matrix[x][y];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ArrayList<Position> getNeighborhood(Position pos, int dis) {
+        ArrayList<Position> positionArrayList = new ArrayList<>();
+        if (pos.getRowIndex() + dis < row) {
+            positionArrayList.add(this.getPosition(pos.getRowIndex() + dis, pos.getColumnIndex()));
+            this.getPosition(pos.getRowIndex() + dis, pos.getColumnIndex()).setPrev(pos);
+        }
+        if (pos.getColumnIndex() + dis < col) {
+            positionArrayList.add(this.getPosition(pos.getRowIndex(), pos.getColumnIndex() + dis));
+            this.getPosition(pos.getRowIndex(), pos.getColumnIndex() + dis).setPrev(pos);
+        }
+        if (pos.getRowIndex() - dis >= 0) {
+            positionArrayList.add(this.getPosition(pos.getRowIndex() - dis, pos.getColumnIndex()));
+            this.getPosition(pos.getRowIndex() - dis, pos.getColumnIndex()).setPrev(pos);
+
+        }
+        if (pos.getColumnIndex() - dis >= 0) {
+            positionArrayList.add(this.getPosition(pos.getRowIndex(), pos.getColumnIndex() - dis));
+            this.getPosition(pos.getRowIndex(), pos.getColumnIndex() - dis).setPrev(pos);
+        }
+        return positionArrayList;
+
+    }
 
     /*@Override
     public Iterator iterator() {
