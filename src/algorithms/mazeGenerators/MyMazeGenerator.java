@@ -21,24 +21,24 @@ public class MyMazeGenerator extends AMazeGenerator {
             t.setVisited(true);
             int x = t.getRowIndex();
             int y = t.getColumnIndex();
-            maze.set_val(x, y, 1);
+            maze.set_val(x, y, 0);
             if (t.getPrev() != null) {
                 if (x != t.getPrev().getRowIndex()) {
                     if (x > t.getPrev().getRowIndex()) {
                         maze.getPosition(x - 1, y).setVisited(true);
-                        maze.getPosition(x - 1, y).setVal(1);
+                        maze.getPosition(x - 1, y).setVal(0);
                     } else {
                         maze.getPosition(x + 1, y).setVisited(true);
-                        maze.getPosition(x + 1, y).setVal(1);
+                        maze.getPosition(x + 1, y).setVal(0);
                     }
                 }
                 if (y != t.getPrev().getColumnIndex()) {
                     if (y > t.getPrev().getColumnIndex()) {
                         maze.getPosition(x, y - 1).setVisited(true);
-                        maze.getPosition(x, y - 1).setVal(1);
+                        maze.getPosition(x, y - 1).setVal(0);
                     } else {
                         maze.getPosition(x, y + 1).setVisited(true);
-                        maze.getPosition(x, y + 1).setVal(1);
+                        maze.getPosition(x, y + 1).setVal(0);
                     }
                 }
             }
@@ -46,10 +46,13 @@ public class MyMazeGenerator extends AMazeGenerator {
             for (Position p : tempArr) {
                 if (!p.isVisited())
                     positionQueue.add(p);
+                else
+                    p.setPrev(null);
             }
         }
-        maze.getPosition(row - 2, col - 1).setVal(1);
-        maze.getPosition(row - 1, col - 2).setVal(1);
+        maze.getPosition(row - 2, col - 1).setVal(0);
+        maze.getPosition(row - 1, col - 2).setVal(0);
+        maze.getPosition(row - 1, col - 1).setVal(0);
 
         return maze;
     }

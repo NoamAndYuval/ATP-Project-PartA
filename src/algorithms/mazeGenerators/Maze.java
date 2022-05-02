@@ -21,6 +21,7 @@ public class Maze {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 maze_matrix[i][j] = new Position(i, j);
+                maze_matrix[i][j].setVal(1);
             }
         }
         source = maze_matrix[0][0];
@@ -79,22 +80,24 @@ public class Maze {
 
     public ArrayList<Position> getNeighborhood(Position pos, int dis) {
         ArrayList<Position> positionArrayList = new ArrayList<>();
-        if (pos.getRowIndex() + dis < row) {
-            positionArrayList.add(this.getPosition(pos.getRowIndex() + dis, pos.getColumnIndex()));
-            this.getPosition(pos.getRowIndex() + dis, pos.getColumnIndex()).setPrev(pos);
+        int x = pos.getRowIndex();
+        int y = pos.getColumnIndex();
+        if (x + dis < row) {
+            positionArrayList.add(this.maze_matrix[x + dis][y]);
+            this.maze_matrix[x + dis][y].setPrev(pos);
         }
-        if (pos.getColumnIndex() + dis < col) {
-            positionArrayList.add(this.getPosition(pos.getRowIndex(), pos.getColumnIndex() + dis));
-            this.getPosition(pos.getRowIndex(), pos.getColumnIndex() + dis).setPrev(pos);
+        if (y + dis < col) {
+            positionArrayList.add(this.maze_matrix[x][y + dis]);
+            this.maze_matrix[x][y + dis].setPrev(pos);
         }
-        if (pos.getRowIndex() - dis >= 0) {
-            positionArrayList.add(this.getPosition(pos.getRowIndex() - dis, pos.getColumnIndex()));
-            this.getPosition(pos.getRowIndex() - dis, pos.getColumnIndex()).setPrev(pos);
+        if (x - dis >= 0) {
+            positionArrayList.add(this.maze_matrix[x - dis][y]);
+            this.maze_matrix[x - dis][y].setPrev(pos);
 
         }
-        if (pos.getColumnIndex() - dis >= 0) {
-            positionArrayList.add(this.getPosition(pos.getRowIndex(), pos.getColumnIndex() - dis));
-            this.getPosition(pos.getRowIndex(), pos.getColumnIndex() - dis).setPrev(pos);
+        if (y - dis >= 0) {
+            positionArrayList.add(this.maze_matrix[x][y - dis]);
+            this.maze_matrix[x][y - dis].setPrev(pos);
         }
         return positionArrayList;
 
