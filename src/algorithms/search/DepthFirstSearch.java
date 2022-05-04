@@ -21,7 +21,6 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
                 }
             }
         }
-
         return reconstructionPath(Search.getTarget());
 
     }

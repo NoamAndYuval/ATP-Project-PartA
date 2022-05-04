@@ -1,25 +1,22 @@
-package algorithms.mazeGenerators;
+package algorithms.maze3D;
 
-public class Position {
-    protected int x;
-    protected int y;
-    protected int val;
-    protected boolean visited;
-    protected Position prev;
+import algorithms.mazeGenerators.Position;
 
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.visited = false;
-        this.val = 1;
-        this.prev = null;
+public class Position3D extends Position {
+    protected int z;
+
+
+    public Position3D(int z,int x, int y) {
+        super(x, y);
+        this.z = z;
     }
+
 
     @Override
     public String toString() {
-        return "{" +
-                x +
+        return "{" + x +
                 "," + y +
+                "," + z +
                 '}';
     }
 
@@ -39,6 +36,9 @@ public class Position {
         this.y = y;
     }
 
+    public int getDepthIndex() { return z; }
+
+    public void setDepthIndex(int z) { this.z = z; }
 
     public int getVal() {
         return val;
@@ -48,14 +48,13 @@ public class Position {
         this.val = val;
     }
 
-    public Position getPrev() {
-        return prev;
+    public Position3D getPrev() {
+        return (Position3D)prev;
     }
 
-    public void setPrev(Position prev) {
+    public void setPrev(Position3D prev) {
         this.prev = prev;
     }
-
 
     public void setVisited(boolean visited) {
         this.visited = visited;

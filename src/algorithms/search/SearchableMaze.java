@@ -6,11 +6,11 @@ import algorithms.mazeGenerators.Position;
 import java.util.ArrayList;
 
 public class SearchableMaze implements ISearchable {
-    private static double WEIGHT=2;
-    private Maze maze;
+    public static double WEIGHT = 2;
+    protected Maze maze;
     private MazeState[][] AllStates;
-    private AState source;
-    private AState target;
+    protected AState source;
+    protected AState target;
 
     public SearchableMaze(Maze maze) {
         AllStates = new MazeState[maze.getRow()][maze.getCol()];
@@ -22,8 +22,8 @@ public class SearchableMaze implements ISearchable {
                 }
             }
         }
-        source = AllStates[0][0];
-        target = AllStates[maze.getRow() - 1][maze.getCol() - 1];
+        source = AllStates[maze.getStartPosition().getRowIndex()][maze.getStartPosition().getColumnIndex()];
+        target = AllStates[maze.getGoalPosition().getRowIndex()][maze.getGoalPosition().getColumnIndex()];
     }
 
     public void resetAState() {
@@ -45,27 +45,27 @@ public class SearchableMaze implements ISearchable {
         int j = mazeState.myPos.getColumnIndex();
         if (i - 1 >= 0 && maze.getPosition(i - 1, j).getVal() == 0) {
             Neighbors.add(AllStates[i - 1][j]);
-            AllStates[i-1][j].setWeight(WEIGHT);
+            AllStates[i - 1][j].setWeight(WEIGHT);
         }
         if (i - 1 >= 0 && j + 1 < maze.getCol() && maze.getPosition(i - 1, j + 1).getVal() == 0 && (maze.getPosition(i - 1, j).getVal() == 0 || maze.getPosition(i, j + 1).getVal() == 0)) {
             Neighbors.add(AllStates[i - 1][j + 1]);
-            AllStates[i-1][j+1].setWeight(WEIGHT+1);
+            AllStates[i - 1][j + 1].setWeight(WEIGHT + 1);
         }
         if (j + 1 < maze.getCol() && maze.getPosition(i, j + 1).getVal() == 0) {
             Neighbors.add(AllStates[i][j + 1]);
-            AllStates[i][j+1].setWeight(WEIGHT);
+            AllStates[i][j + 1].setWeight(WEIGHT);
         }
         if (i + 1 < maze.getRow() && j + 1 < maze.getCol() && maze.getPosition(i + 1, j + 1).getVal() == 0 && (maze.getPosition(i + 1, j).getVal() == 0 || maze.getPosition(i, j + 1).getVal() == 0)) {
             Neighbors.add(AllStates[i + 1][j + 1]);
-            AllStates[i+1][j+1].setWeight(WEIGHT+1);
+            AllStates[i + 1][j + 1].setWeight(WEIGHT + 1);
         }
         if (i + 1 < maze.getRow() && maze.getPosition(i + 1, j).getVal() == 0) {
             Neighbors.add(AllStates[i + 1][j]);
             AllStates[i + 1][j].setWeight(WEIGHT);
         }
-        if (i + 1 < maze.getRow() && j - 1 >= 0 && maze.getPosition(i + 1, j - 1).getVal() == 0 && (maze.getPosition(i + 1, j).getVal() == 0 || maze.getPosition(i, j - 1).getVal() == 0)){
+        if (i + 1 < maze.getRow() && j - 1 >= 0 && maze.getPosition(i + 1, j - 1).getVal() == 0 && (maze.getPosition(i + 1, j).getVal() == 0 || maze.getPosition(i, j - 1).getVal() == 0)) {
             Neighbors.add(AllStates[i + 1][j - 1]);
-            AllStates[i + 1][j - 1].setWeight(WEIGHT+1);
+            AllStates[i + 1][j - 1].setWeight(WEIGHT + 1);
         }
         if (j - 1 >= 0 && maze.getPosition(i, j - 1).getVal() == 0) {
             Neighbors.add(AllStates[i][j - 1]);
@@ -73,7 +73,7 @@ public class SearchableMaze implements ISearchable {
         }
         if (i - 1 >= 0 && j - 1 >= 0 && maze.getPosition(i - 1, j - 1).getVal() == 0 && (maze.getPosition(i - 1, j).getVal() == 0 || maze.getPosition(i, j - 1).getVal() == 0)) {
             Neighbors.add(AllStates[i - 1][j - 1]);
-            AllStates[i - 1][j - 1].setWeight(WEIGHT+1);
+            AllStates[i - 1][j - 1].setWeight(WEIGHT + 1);
         }
         return Neighbors;
     }

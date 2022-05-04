@@ -3,7 +3,11 @@ package algorithms.search;
 import algorithms.mazeGenerators.Position;
 
 public class MazeState extends AState{
-    Position myPos;
+
+
+
+
+    protected Position myPos;
 
 
     public MazeState(Position myPos) {
@@ -13,6 +17,11 @@ public class MazeState extends AState{
     @Override
     public String toString() {
         return myPos.toString();
+    }
+
+
+    public Position getMyPos() {
+        return myPos;
     }
 
 }

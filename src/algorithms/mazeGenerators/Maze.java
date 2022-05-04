@@ -5,14 +5,11 @@ import java.util.Iterator;
 
 
 public class Maze {
-    private int row;
-    private int col;
-
-
+    protected int row;
+    protected int col;
+    protected Position source;
+    protected Position target;
     private Position[][] maze_matrix;
-    private Position source;
-    private Position target;
-
 
     public Maze(int row, int col) {
         this.row = row;
@@ -21,7 +18,6 @@ public class Maze {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 maze_matrix[i][j] = new Position(i, j);
-                maze_matrix[i][j].setVal(1);
             }
         }
         source = maze_matrix[0][0];

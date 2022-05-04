@@ -6,23 +6,22 @@ import java.util.LinkedList;
 public class BreadthFirstSearch extends ASearchingAlgorithm {
 
 
-
     @Override
     public Solution solve(ISearchable Search) {
-      return BFSsolve(Search,new LinkedList<>());
+        return BFSsolve(Search, new LinkedList<>());
 
     }
-    protected Solution BFSsolve(ISearchable Search,Queue<AState> queue){
+
+    protected Solution BFSsolve(ISearchable Search, Queue<AState> queue) {
         Search.resetAState();
         queue.add(Search.getFirst());
         while (!queue.isEmpty()) {
 
             AState temp = queue.remove();
             temp.setVisited(true);
-
-
+            if (temp == Search.getTarget())
+                return reconstructionPath(Search.getTarget());
             for (AState neighbor : Search.getAllPossibleStates(temp)) {
-
                 this.NumberOfNodesEvaluated++;
                 if (!neighbor.isVisited() && neighbor.getPrev() == null) {
                     neighbor.setPrev(temp);
@@ -30,7 +29,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                 }
             }
         }
-        return reconstructionPath(Search.getTarget());
+        return null;
 
     }
 
