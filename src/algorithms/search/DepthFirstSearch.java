@@ -12,16 +12,19 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         stateStack.push(Search.getFirst());
         while (!stateStack.isEmpty()) {
             AState temp = stateStack.pop();
+            if(temp == Search.getTarget())
+                return reconstructionPath(Search.getTarget());
+            this.NumberOfNodesEvaluated++;
             temp.setVisited(true);
             for (AState neighbor : Search.getAllPossibleStates(temp)) {
-                this.NumberOfNodesEvaluated++;
                 if (!neighbor.isVisited()) {
                     neighbor.setPrev(temp);
                     stateStack.push(neighbor);
                 }
             }
         }
-        return reconstructionPath(Search.getTarget());
+        return null;
+
 
     }
 

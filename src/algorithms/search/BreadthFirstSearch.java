@@ -16,13 +16,13 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         Search.resetAState();
         queue.add(Search.getFirst());
         while (!queue.isEmpty()) {
-
             AState temp = queue.remove();
+            this.NumberOfNodesEvaluated++;
             temp.setVisited(true);
             if (temp == Search.getTarget())
                 return reconstructionPath(Search.getTarget());
             for (AState neighbor : Search.getAllPossibleStates(temp)) {
-                this.NumberOfNodesEvaluated++;
+
                 if (!neighbor.isVisited() && neighbor.getPrev() == null) {
                     neighbor.setPrev(temp);
                     queue.add(neighbor);

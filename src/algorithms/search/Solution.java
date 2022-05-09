@@ -15,6 +15,10 @@ public class Solution {
     }
 
     public void addState(AState state) {
-        stateList.add(0,state);
+        stateList.add(0, state);
+    }
+
+    public int getSulSize() {
+        return stateList.size();
     }
 }
