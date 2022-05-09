@@ -5,13 +5,26 @@ import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 public class MyMazeGenerator extends AMazeGenerator {
 
 
     @Override
     public Maze generate(int row, int col) {
-        Maze maze = new Maze(row, col);
 
+        if (row<=0||col<=0){
+            return null;
+        }
+        Maze maze = new Maze(row, col);
+        if (row<2||col<2){
+            for (int i=0;i<row;i++){
+                for (int j=0;j<col;j++){
+                    maze.set_val(i,j,0);
+                }
+            }
+            return maze;
+        }
         ArrayList<Position> positionQueue = new ArrayList<Position>();
         positionQueue.add(maze.getStartPosition());
         while (!positionQueue.isEmpty()) {
