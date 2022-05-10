@@ -1,5 +1,11 @@
 package algorithms.mazeGenerators;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.IndexColorModel;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -47,6 +53,36 @@ public class Maze {
 
     }
 
+    public void Display() throws IOException {
+        int red;
+        int green;
+        int blue;
+        /////////////////set this matrices
+        Color c;
+        BufferedImage image = new BufferedImage(row/*Width*/, col/*height*/, BufferedImage.TYPE_INT_ARGB);
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if((i==source.getRowIndex()&&j==source.getColumnIndex())){
+                    c = new Color(0, 255, 0);
+                }
+                else if ((i==target.getRowIndex()&&j==target.getColumnIndex())){
+                    c = new Color(255, 0, 0);
+
+                }
+                else if ((maze_matrix[i][j].getVal()==0)){
+                    c = new Color(255, 255, 255);
+                }
+                else {
+                    c = new Color(0, 0, 0);
+                }
+                image.setRGB(i, j, c.getRGB());
+            }
+        }
+
+
+        ImageIO.write(image, "jpg", new File("C:\\Users\\noams\\IdeaProjects\\ATP-Project-PartA\\testspic.jpg"));
+    }
     public void set_val(int row, int col, int val) {
         if (row >= this.row || col >= this.col || row < 0 || col < 0) {
             throw new ArrayIndexOutOfBoundsException();
