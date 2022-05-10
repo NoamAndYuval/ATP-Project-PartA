@@ -81,7 +81,6 @@ public class Maze {
         }
 
 
-        image.createGraphics();
         ImageIO.write(image, "jpg", new File("C:\\Users\\noams\\IdeaProjects\\ATP-Project-PartA\\testspic.jpg"));
     }
     public void set_val(int row, int col, int val) {
