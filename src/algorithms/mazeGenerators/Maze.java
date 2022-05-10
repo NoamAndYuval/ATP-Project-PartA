@@ -1,6 +1,7 @@
 package algorithms.mazeGenerators;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.IndexColorModel;
@@ -80,8 +81,20 @@ public class Maze {
             }
         }
 
-
-        ImageIO.write(image, "jpg", new File("C:\\Users\\noams\\IdeaProjects\\ATP-Project-PartA\\testspic.jpg"));
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(row*20+100, col*20+100);
+        JPanel pane = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(image, 15, 15,row*7,col*7,null );
+            }
+        };
+        pane.setSize(650,650);
+        pane.setPreferredSize(new Dimension(650, 650));
+        frame.add(pane,BorderLayout.CENTER);
+        frame.setVisible(true);
     }
     public void set_val(int row, int col, int val) {
         if (row >= this.row || col >= this.col || row < 0 || col < 0) {
