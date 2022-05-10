@@ -1,21 +1,24 @@
 package test;
 import algorithms.mazeGenerators.*;
 
+import java.io.IOException;
+
 public class RunMazeGenerator {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        testMazeGenerator(new EmptyMazeGenerator());
 //        testMazeGenerator(new SimpleMazeGenerator());
         testMazeGenerator(new MyMazeGenerator());
     }
-    private static void testMazeGenerator(IMazeGenerator mazeGenerator) {
+    private static void testMazeGenerator(IMazeGenerator mazeGenerator) throws IOException {
 
 // prints the time it takes the algorithm to run
  System.out.println(String.format("Maze generation time(ms): %s", mazeGenerator.measureAlgorithmTimeMillis(1000/*rows*/,1000/*columns*/)));
 // generate another maze
-       Maze maze = mazeGenerator.generate(100/*rows*/, 100/*columns*/);
+       Maze maze = mazeGenerator.generate(30/*rows*/, 31/*columns*/);
 // prints the maze
 
         maze.print();
+        maze.Display();
         System.out.println("**********************");
 // get the maze entrance
        // Position startPosition = maze.getStartPosition();
