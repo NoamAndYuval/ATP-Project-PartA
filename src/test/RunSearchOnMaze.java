@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(100,100 );
+        Maze maze = mg.generate(151,100 );
 //        maze.print();
         SearchableMaze searchableMaze = new SearchableMaze(maze);
         solveProblem(searchableMaze, new BreadthFirstSearch(),maze);
@@ -52,7 +52,7 @@ public class RunSearchOnMaze {
                     c = new Color(255, 0, 0);
                 }
                 else if (contain(solution,maze.getPosition(i,j))){
-                    c = new Color(0, 0, 255);
+                    c = new Color(0, 150, 255);
                 }
                 else if ((maze.getPosition(i,j).getVal()==0)){
                     c = new Color(255, 255, 255);
