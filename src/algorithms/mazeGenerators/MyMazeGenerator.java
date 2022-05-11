@@ -63,10 +63,7 @@ public class MyMazeGenerator extends AMazeGenerator {
                     p.setPrev(null);
             }
         }
-        maze.getPosition(row - 2, col - 1).setVal(0);
-        maze.getPosition(row - 1, col - 2).setVal(0);
-        maze.getPosition(row - 1, col - 1).setVal(0);
-
+        maze.choosetarget();
         return maze;
     }
 

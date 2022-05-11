@@ -4,10 +4,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.IndexColorModel;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Maze {
@@ -55,10 +54,7 @@ public class Maze {
     }
 
     public void Display() throws IOException {
-        int red;
-        int green;
-        int blue;
-        /////////////////set this matrices
+
         Color c;
         BufferedImage image = new BufferedImage(row/*Width*/, col/*height*/, BufferedImage.TYPE_INT_ARGB);
 
@@ -81,7 +77,7 @@ public class Maze {
             }
         }
 
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Maze");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(row*20+100, col*20+100);
         JPanel pane = new JPanel() {
@@ -122,6 +118,30 @@ public class Maze {
         }
     }
 
+
+    public void choosetarget() {
+        Random random=new Random();
+        int place=random.nextInt(col);
+        if(random.nextInt(2)==1){
+            if (maze_matrix[row-2][place].getVal()==1){
+                maze_matrix[row-2][place].setVal(0);
+            }
+            maze_matrix[row-1][place].setVal(0);
+            target= maze_matrix[row-1][place];
+        }
+
+        else{
+            place=random.nextInt(row);
+            if (maze_matrix[place][col-2].getVal()==1){
+                maze_matrix[place][col-2].setVal(0);
+            }
+            maze_matrix[place][col-1].setVal(0);
+            target=maze_matrix[place][col-1];
+
+        }
+
+
+    }
     public ArrayList<Position> getNeighborhood(Position pos, int dis) {
         ArrayList<Position> positionArrayList = new ArrayList<>();
         int x = pos.getRowIndex();

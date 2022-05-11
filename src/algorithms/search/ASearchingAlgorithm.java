@@ -1,5 +1,7 @@
 package algorithms.search;
 
+import algorithms.mazeGenerators.Maze;
+
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
 
     protected int NumberOfNodesEvaluated = 0;
