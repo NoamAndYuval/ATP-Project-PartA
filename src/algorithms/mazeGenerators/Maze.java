@@ -55,10 +55,7 @@ public class Maze {
     }
 
     public void Display() throws IOException {
-        int red;
-        int green;
-        int blue;
-        /////////////////set this matrices
+
         Color c;
         BufferedImage image = new BufferedImage(row/*Width*/, col/*height*/, BufferedImage.TYPE_INT_ARGB);
 
