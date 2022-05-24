@@ -8,6 +8,7 @@ import java.awt.image.IndexColorModel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Maze {
@@ -64,17 +65,14 @@ public class Maze {
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if((i==source.getRowIndex()&&j==source.getColumnIndex())){
+                if ((i == source.getRowIndex() && j == source.getColumnIndex())) {
                     c = new Color(0, 255, 0);
-                }
-                else if ((i==target.getRowIndex()&&j==target.getColumnIndex())){
+                } else if ((i == target.getRowIndex() && j == target.getColumnIndex())) {
                     c = new Color(255, 0, 0);
 
-                }
-                else if ((maze_matrix[i][j].getVal()==0)){
+                } else if ((maze_matrix[i][j].getVal() == 0)) {
                     c = new Color(255, 255, 255);
-                }
-                else {
+                } else {
                     c = new Color(0, 0, 0);
                 }
                 image.setRGB(i, j, c.getRGB());
@@ -83,19 +81,20 @@ public class Maze {
 
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(row*20+100, col*20+100);
+        frame.setSize(row * 20 + 100, col * 20 + 100);
         JPanel pane = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(image, 15, 15,row*7,col*7,null );
+                g.drawImage(image, 15, 15, row * 7, col * 7, null);
             }
         };
-        pane.setSize(650,650);
+        pane.setSize(650, 650);
         pane.setPreferredSize(new Dimension(650, 650));
-        frame.add(pane,BorderLayout.CENTER);
+        frame.add(pane, BorderLayout.CENTER);
         frame.setVisible(true);
     }
+
     public void set_val(int row, int col, int val) {
         if (row >= this.row || col >= this.col || row < 0 || col < 0) {
             throw new ArrayIndexOutOfBoundsException();
@@ -146,6 +145,27 @@ public class Maze {
         return positionArrayList;
 
     }
+
+    public void choosetarget() {
+        Random random = new Random();
+        int place = random.nextInt(col);
+        if (random.nextInt(2) == 1) {
+            if (maze_matrix[row - 2][place].getVal() == 1) {
+                maze_matrix[row - 2][place].setVal(0);
+            }
+            maze_matrix[row - 1][place].setVal(0);
+            target = maze_matrix[row - 1][place];
+        } else {
+            place = random.nextInt(row);
+            if (maze_matrix[place][col - 2].getVal() == 1) {
+                maze_matrix[place][col - 2].setVal(0);
+            }
+            maze_matrix[place][col - 1].setVal(0);
+            target = maze_matrix[place][col - 1];
+
+        }
+    }
+
 
     /*@Override
     public Iterator iterator() {
