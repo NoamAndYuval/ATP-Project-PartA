@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public class RunMazeGenerator {
     public static void main(String[] args) throws IOException {
-//        testMazeGenerator(new EmptyMazeGenerator());
-//        testMazeGenerator(new SimpleMazeGenerator());
+        testMazeGenerator(new EmptyMazeGenerator());
+        testMazeGenerator(new SimpleMazeGenerator());
         testMazeGenerator(new MyMazeGenerator());
     }
     private static void testMazeGenerator(IMazeGenerator mazeGenerator) throws IOException {
@@ -18,14 +18,14 @@ public class RunMazeGenerator {
 // prints the maze
 
         maze.print();
-        maze.Display();
+//        maze.Display();
         System.out.println("**********************");
 // get the maze entrance
-       // Position startPosition = maze.getStartPosition();
+        Position startPosition = maze.getStartPosition();
 // print the start position
-        //System.out.println(String.format("Start Position: %s", startPosition)); // format "{row,column}"
+        System.out.println(String.format("Start Position: %s", startPosition)); // format "{row,column}"
 // prints the maze exit position
-        //System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
+        System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
     }
 
 }
